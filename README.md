@@ -8,7 +8,7 @@
 ### Step 2: Setup database (/DataWareHouse_BE/setting.py)
 ```python
 
-# Cài theo cái Database của mọi người
+# Cài theo cái Database của mọi người 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', #giữ nguyên cái này
@@ -35,6 +35,7 @@ Chạy server
 
 ### Step 4: Check data:
 http://127.0.0.1:8000/admin 
+![Alt text](image-1.png)
 
 ### Step 5: Check các API:
 
