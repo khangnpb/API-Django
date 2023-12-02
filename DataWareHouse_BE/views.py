@@ -39,5 +39,5 @@ def FactEcommerceSalesApi(request,id=0):
     if request.method=='GET':
         fact_ecommerce_sales = FactEcommerceSales.objects.all()
         fact_ecommerce_sales_serializer=FactEcommerceSalesSerializer(fact_ecommerce_sales,many=True)
-        return JsonResponse(fact_ecommerce_sales.data,safe=False)
+        return JsonResponse(fact_ecommerce_sales_serializer.data,safe=False)
     

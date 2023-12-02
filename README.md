@@ -5,20 +5,12 @@
 > . ./.venv/Scripts/activate
 ```
 
-### Step 2: Setup database (/DataWareHouse_BE/setting.py)
-```python
-
-# Cài theo cái Database của mọi người 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', #giữ nguyên cái này
-        'NAME': 'mysql',
-        'USER': 'root',
-        'HOST': 'localhost',
-        'PASSWORD': 'root',
-        'PORT': '3306',    
-    }
-}
+### Step 2: Setup database
+```
+1. compose up -> docker-compose.yml 
+2. vào http://localhost:80 (admin/admin)
+3. vào database `dw` chọn `import`
+4. gửi cái file sql lên
 ```
 ### Step 3: Run manage.py
 
