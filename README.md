@@ -20,12 +20,12 @@ pip install -r requirements.txt
 # Cài theo cái Database của mọi người
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # giữ nguyên cái này
-        'NAME': 'mysql', # Your Database Name
-        'USER': 'root', # Your username
-        'HOST': 'localhost', # Your hostname (default is localhost)
-        'PASSWORD': 'root', # Your password (if NO password, let it empty)
-        'PORT': '3306', # Your database port (default for mysql is 3306)
+        'ENGINE': 'django.db.backends.mysql', #giữ nguyên cái này
+        'NAME': 'mysql',
+        'USER': 'root',
+        'HOST': 'localhost',
+        'PASSWORD': 'root',
+        'PORT': '3306',    
     }
 }
 ```
@@ -46,8 +46,7 @@ python manage.py runserver
 ![Alt text](image.png)
 
 ### Step 4: Check data:
-
-http://localhost:8000/admin 
+http://127.0.0.1:8000/admin 
 
 ### Step 5: Check các API:
 
