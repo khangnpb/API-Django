@@ -14,39 +14,39 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-### Step 2: Setup database (/DataWareHouse_BE/setting.py)
-```python
-
-# Cài theo cái Database của mọi người
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', #giữ nguyên cái này
-        'NAME': 'mysql',
-        'USER': 'root',
-        'HOST': 'localhost',
-        'PASSWORD': 'root',
-        'PORT': '3306',    
-    }
-}
+### Step 2: Setup database
+1. Run docker-compose.yaml to create Database Container.
+```cmd
+docker-compose up
 ```
+2. After running, access to http://localhost:80 and log in with DB information (admin/admin)
+3. In **dw** DB, import file **dw.sql**
+4. Click **OK** and wait till the end of the imported process.
+
 ### Step 3: Run manage.py
 
-Tạo tài khoản (admin/admin)
+#### Update database in Django (Migrations)
+```cmd
+python manage.py makemigrations
+python manage.py migrate --fake DataWareHouse_BE
+python manage.py migrate
+```
+![Alt text](image.png)
+
+#### Create account to access (admin/admin)
 ```cmd
 python manage.py createsuperuser  
 ```
 Then, following the django instruction.
 
-Chạy server
+#### Run server
 ```cmd
-python manage.py makemigrations
-python manage.py migrate
 python manage.py runserver
 ```
-![Alt text](image.png)
 
 ### Step 4: Check data:
-http://127.0.0.1:8000/admin 
+
+http://localhost:8000/admin
 
 ### Step 5: Check các API:
 
