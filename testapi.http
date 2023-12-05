@@ -1,0 +1,31 @@
+
+GET  http://127.0.0.1:8000/detail_customer/all HTTP/1.1
+content-type: application/json
+
+####
+
+GET  http://127.0.0.1:8000/dim_store/all HTTP/1.1
+content-type: application/json
+
+###
+GET   http://127.0.0.1:8000/detail_customer/all
+    ?page=2
+    &pageSize=10 HTTP/1.1
+content-type: application/json
+
+###
+GET   http://127.0.0.1:8000/dim_store/all?page=2&pageSize=10 HTTP/1.1
+content-type: application/json
+
+###
+GET   http://127.0.0.1:8000/detail_customer/all?page=2&pageSize=10 HTTP/1.1
+content-type: application/json
+
+
+###
+GET   http://127.0.0.1:8000/detail_customer/agv?nam=1 HTTP/1.1
+content-type: application/json
+
+###
+GET   http://127.0.0.1:8000/detail_customer/agv?nu=1 HTTP/1.1
+content-type: application/json
