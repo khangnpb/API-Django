@@ -92,6 +92,14 @@ DATABASES = {
         'charset': 'utf8mb4',
         'collation': 'utf8mb4_unicode_ci',
     },
+    # 'test': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'test_dw',
+    #     'USER': 'admin',
+    #     'PASSWORD': 'admin',
+    #     'HOST': 'localhost',
+    #     'PORT': '3306',
+    # },
 }
 
 # Password validation
