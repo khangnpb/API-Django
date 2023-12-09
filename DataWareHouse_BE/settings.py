@@ -87,7 +87,11 @@ DATABASES = {
         'HOST': 'localhost',
         'PASSWORD': 'admin',
         'PORT': '3306',    
-    }
+    },
+    'OPTIONS': {
+        'charset': 'utf8mb4',
+        'collation': 'utf8mb4_unicode_ci',
+    },
 }
 
 # Password validation
