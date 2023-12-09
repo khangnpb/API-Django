@@ -13,7 +13,7 @@ class DetailCustomer(models.Model):
     yearly_income	= models.IntegerField()	
     total_children	= models.IntegerField(null=True)
     is_active	= models.IntegerField()	
-    customer_since	= models.CharField(max_length=10)
+    customer_since	= models.DateField()
     recency	= models.IntegerField(null=True)	
     frequency	= models.DecimalField(max_digits=20,decimal_places=8)	
     monetary	= models.IntegerField()

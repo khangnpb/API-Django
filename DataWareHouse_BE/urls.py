@@ -22,7 +22,8 @@ from DataWareHouse_BE import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('detail_customer/all', views.DetailCustomerApi),
+    # path('detail_customer/all', views.DetailCustomerApi),
+    path('detail_customer/all', views.DetailCustomerApi, name='detailcustomer-api'),
     path('dim_customer/all', views.DimCustomerApi),
     path('dim_product/all', views.DimProductApi),
     path('dim_store/all', views.DimStoreApi),
