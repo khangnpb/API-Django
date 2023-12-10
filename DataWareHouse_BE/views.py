@@ -23,7 +23,8 @@ def DetailCustomerApi(request,id=0):
         # detail_customers_serializer=DetailCustomerSerializer(detail_customers,many=True)
         return JsonResponse(detail_customers,safe=False)
     
-    # this function used for retrieve sum of customer between fromDate, toDate
+    # this function used for retrieve sum of customer between fromDate, toDate #
+    ## ------- Format: fromDate, toDate: 'YYYY-MM-DD' ------- ##
     elif request.method == 'POST':
         try:
             # export data receiving from Frontend
