@@ -19,9 +19,9 @@ from datetime import datetime
 @api_view(['GET', 'POST'])
 def DetailCustomerApi(request,id=0):
     if request.method=='GET':
-        detail_customers = DetailCustomer.objects.all()
-        detail_customers_serializer=DetailCustomerSerializer(detail_customers,many=True)
-        return JsonResponse(detail_customers_serializer.data,safe=False)
+        detail_customers = DetailCustomer.objects.all().count()
+        # detail_customers_serializer=DetailCustomerSerializer(detail_customers,many=True)
+        return JsonResponse(detail_customers,safe=False)
     
     # this function used for retrieve sum of customer between fromDate, toDate
     elif request.method == 'POST':
