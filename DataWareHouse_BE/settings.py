@@ -38,14 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'DataWareHouse_BE',
     'rest_framework',
-    'DataWareHouse_BE'
+    'corsheaders',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True 
-
 MIDDLEWARE = [
-    # 'coresheaders.middleware.CoresMiddleware',
+    'coresheaders.middleware.CoresMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -54,6 +53,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Allow all ReactJS apps to connect to this backend
+REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',)}
+CORS_ORIGIN_ALLOW_ALL = True 
 
 ROOT_URLCONF = 'DataWareHouse_BE.urls'
 
@@ -126,7 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Ho_Chi_Minh'
 
 USE_I18N = True
 
