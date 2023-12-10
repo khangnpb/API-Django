@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
+from django.db.models.functions import ExtractYear
+from django.db.models import Count
+
+from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
@@ -18,6 +21,11 @@ from datetime import datetime
 @csrf_exempt
 @api_view(['GET', 'POST'])
 def DetailCustomerApi(request,id=0):
+    # if request.method=='GET':
+    #     detail_customers = DetailCustomer.objects.all().count()
+    #     detail_customers_serializer=DetailCustomerSerializer(detail_customers,many=True)
+    #     return JsonResponse(detail_customers_serializer.data,safe=False)
+    
     if request.method=='GET':
         detail_customers = DetailCustomer.objects.all().count()
         # detail_customers_serializer=DetailCustomerSerializer(detail_customers,many=True)
@@ -37,7 +45,6 @@ def DetailCustomerApi(request,id=0):
 
             # get sum of customer between fromDate and toDate
             sum_customers = DetailCustomer.objects.filter(customer_since__range=(fromDate, toDate)).count()
-            
             return Response({'sum_customers': sum_customers})
         except:
             return Response({'error': 'Invalid request method'}, status=400)
@@ -52,6 +59,49 @@ def DetailCustomerApi(request,id=0):
         #     return Response({'sum_customers': sum_customers})
         # else:
         #     return Response({'error': serializer.errors}, status=400)
+
+@api_view(['GET'])
+def customerCountByGender(request,id=0):
+    # if request.method=='GET':
+    male_customers = DetailCustomer.objects.filter(gender='Nam').count()
+    female_customers = DetailCustomer.objects.filter(gender='Nữ').count()
+    # detail_customers_serializer=DetailCustomerSerializer(detail_customers,many=True)
+    return JsonResponse([{'gender': 'male', 'count': male_customers}, {'gender': 'male', 'count': female_customers}],safe=False)
+
+@api_view(['GET'])
+def customerCountByAge(request,id=0):
+    # Assuming your birthday field is a DateField or DateTimeField
+    # Also, assuming the format is %YYYY-%MM-%DD
+    current_year = datetime.now().year
+
+    # Calculate the birth year and age
+    customers_by_age = (
+        DetailCustomer.objects.annotate(
+            # birth_year=ExtractYear('birthday'),
+            age=current_year - ExtractYear('birthday')
+        )
+        .values('age')
+        .annotate(count=Count('customer_key'))
+        .order_by('age')
+    )
+
+    # Convert the queryset to a list for JSON serialization
+    result_list = list(customers_by_age)
+
+    return JsonResponse(result_list, safe=False)
+
+@csrf_exempt
+@api_view(['GET'])
+def customerCountByOccupation(request,id=0):
+    customers_by_occupation = (
+        DetailCustomer.objects.values('occupation')
+        .annotate(count=Count('customer_key'))
+        .order_by('occupation')
+    )
+
+    result_list = list(customers_by_occupation)
+
+    return JsonResponse(result_list, safe=False)
 
 def DimCustomerApi(request,id=0):
     if request.method=='GET':
