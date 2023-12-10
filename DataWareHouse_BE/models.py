@@ -5,7 +5,7 @@ class DetailCustomer(models.Model):
     first_name = models.CharField(max_length=10)	
     last_name	= models.CharField(max_length=30)	
     loyal_group	= models.CharField(max_length=10)	
-    birthday	= models.CharField(max_length=10)	
+    birthday	= models.DateField()	
     gender	= models.CharField(max_length=10)	
     marital_status	= models.CharField(max_length=10)	
     education	= models.CharField(max_length=10)	
