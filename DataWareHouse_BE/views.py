@@ -3,6 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
 from django.db.models.functions import ExtractYear
 from django.db.models import Count
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
@@ -17,10 +18,41 @@ from datetime import datetime
 
 # Create your views here.
 
+@csrf_exempt
+def DetailCustomerApi(request,id=0):
+    if request.method=='GET':
+        
+        detail_customer = DetailCustomer.objects.all()
+        
+        page_number = request.GET.get('page', None)
+        page_size = request.GET.get('pageSize', None)
+        
+        if page_number is not None and page_size is not None:
+            try:
+                page_number = int(page_number)
+                page_size = int(page_size)
+            except ValueError:
+                return JsonResponse({"error": "'page' and 'pageSize' must be integers"}, status=400)
+
+            paginator = Paginator(detail_customer, page_size)
+            try:
+                paginated_detail_customer = paginator.page(page_number)
+            except EmptyPage:
+                return JsonResponse([], safe=False)  
+            except PageNotAnInteger:
+                return JsonResponse({"error": "'page' must be an integer"}, status=400)
+            
+            detail_customer_serializer = DetailCustomerSerializer(paginated_detail_customer, many=True)
+            return JsonResponse(detail_customer_serializer.data, safe=False)
+        
+        detail_customer_serializer = DetailCustomerSerializer(detail_customer, many=True)
+        return JsonResponse(detail_customer_serializer.data,safe=False)
+        
+
 # if you need to pass the CSRF protection for POST method, using this decorator: @csrf_exempt
 @csrf_exempt
 @api_view(['GET', 'POST'])
-def DetailCustomerApi(request,id=0):
+def DetailCustomerFunctApi(request,id=0):
     # if request.method=='GET':
     #     detail_customers = DetailCustomer.objects.all().count()
     #     detail_customers_serializer=DetailCustomerSerializer(detail_customers,many=True)

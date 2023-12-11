@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('detail_customer/all', views.DetailCustomerApi),
     path('detail_customer/all', views.DetailCustomerApi, name='detailcustomer-api'),
+    path('detail_customer/funct', views.DetailCustomerFunctApi, name='detailcustomerfunct-api'),
     path('detail_customer/countByGender', views.customerCountByGender, name='customer-count-by-gender'),
     path('detail_customer/countByAge', views.customerCountByAge, name='customer-count-by-age'),
     path('detail_customer/countByOccupation', views.customerCountByOccupation, name='customer-count-by-occupation'),
